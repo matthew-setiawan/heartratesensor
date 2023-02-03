@@ -160,3 +160,9 @@ class MAX30102():
             ir_buf.append(ir)
 
         return red_buf, ir_buf
+    
+    def read_seq(self, amount=100):
+        while(GPIO.input(self.interrupt) == 1):
+            pass
+        red, ir = self.read_fifo()
+        return red, ir
