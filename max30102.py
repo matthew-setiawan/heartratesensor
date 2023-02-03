@@ -52,7 +52,7 @@ class MAX30102():
         print("Channel: {0}, address: 0x{1:x}".format(channel, address))
         self.address = address
         self.channel = channel
-        self.bus = smbus.SMBus(self.channel)
+        self.bus = smbus.SMBus(channel)
         self.interrupt = gpio_pin
 
         # set gpio mode
@@ -61,7 +61,7 @@ class MAX30102():
 
         self.reset()
 
-        sleep(1)  # wait 1 sec
+        sleep(0.01)  # wait 1 sec
 
         # read & clear interrupt register (read 1 byte)
         reg_data = self.bus.read_i2c_block_data(self.address, REG_INTR_STATUS_1, 1)
